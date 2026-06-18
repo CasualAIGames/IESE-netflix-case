@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\proed\\\\OneDrive - PROEDUCA SUMMA S.L\\\\RELLENO\\\\Escritorio\\\\PROGRAMAS_WEBS\\\\PROGRAMAS_WEBS\\\\IESE_CASOS_OPCION2\\\\media\" | Select-Object Name, @{N='MB';E={[math]::Round\\($_.Length/1MB,1\\)}})"
+    ]
+  }
+}

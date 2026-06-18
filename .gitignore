@@ -1,0 +1,3 @@
+# Excluir los vídeos grandes para no superar los límites de GitHub (100MB por archivo)
+media/*.mp4
+media/**/*.mp4

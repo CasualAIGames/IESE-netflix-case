@@ -1,0 +1,31 @@
+CARPETA DE VÍDEOS · IESE Case Experience
+=========================================
+
+Coloca aquí los archivos de vídeo con EXACTAMENTE estos nombres.
+La app los detecta y reproduce automáticamente. Si un archivo no existe,
+se muestra el marcador de posición (placeholder) y el caso sigue funcionando.
+
+ARCHIVOS QUE LA APP YA BUSCA AHORA MISMO
+----------------------------------------
+
+1) AVATAR DEL PROFESOR · Bienvenida (pieza P1)
+   Nombre exacto:  P1_profesor_bienvenida_9x16.mp4
+   Formato:        VERTICAL 9:16 (ej. 1080 x 1920)
+   Contenido:      Avatar IA del profesor narrando la bienvenida (voz incluida)
+   Duración:       ~60 s
+
+2) RECREACIÓN · Los orígenes de Netflix (pieza R1)
+   Nombre exacto:  R1_origenes_16x9.mp4
+   Formato:        HORIZONTAL 16:9 (ej. 1920 x 1080)
+   Contenido:      Recreación IA con voz en off (ver GUION_PRODUCCION.md)
+   Duración:       2:40
+
+NOTAS
+-----
+- Formato de archivo: MP4 (códec H.264 + audio AAC). Es el más compatible.
+- Respeta MAYÚSCULAS/minúsculas y guiones bajos del nombre.
+- No hace falta tocar código: solo soltar el .mp4 en esta carpeta con su nombre.
+- El resto de piezas (P2..P6, R2..R5) se irán añadiendo con el mismo patrón:
+      Pn_profesor_<tema>_9x16.mp4      (vertical 9:16)
+      Rn_<tema>_16x9.mp4               (horizontal 16:9)
+  Cuando tengas más vídeos, dime el nombre y los conecto igual que estos dos.

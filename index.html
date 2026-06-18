@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IESE Case Experience · Simulador de casos de negocio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=15" />
+</head>
+<body>
+
+  <!-- Barra superior negra -->
+  <div class="topbar">
+    <div class="langs"><span class="act">Español</span><span>English</span></div>
+    <div class="links">
+      <span>Agenda</span><span>Alumni</span><span>Estudiantes</span><span>Emprendedores</span>
+      <span>Talento IESE</span><span>Empresas</span><span>Staff</span><span>Media</span>
+    </div>
+  </div>
+
+  <!-- Cabecera -->
+  <header class="header">
+    <div class="brand" id="brandHome" title="Inicio">
+      <img class="brand-logo" src="assets/iese-logo-dark.svg" alt="IESE Business School · University of Navarra" />
+      <div class="app-name">Case<br/>Experience</div>
+    </div>
+    <div class="header-right">
+      <span class="role-badge" id="roleBadge" style="display:none"></span>
+      <button class="btn-exit" id="btnExit" style="display:none">Salir</button>
+    </div>
+  </header>
+
+  <!-- Pantallas (renderizadas por app.js) -->
+  <main>
+    <section class="screen" id="screen-login"></section>
+    <section class="screen" id="screen-student-home"></section>
+    <section class="screen" id="screen-player"></section>
+    <section class="screen" id="screen-final"></section>
+    <section class="screen" id="screen-professor"></section>
+    <section class="screen" id="screen-studio"></section>
+  </main>
+
+  <footer class="footer">
+    <div><b>IESE Case Experience</b> · Plataforma de simulación de casos — Demo interna</div>
+    <div>Barcelona · Madrid · Múnich · Nueva York · São Paulo</div>
+  </footer>
+
+  <div class="demo-note" id="demoNote" style="display:none">
+    <span class="x" onclick="this.parentElement.style.display='none'">×</span>
+    <span id="demoNoteTxt"></span>
+  </div>
+
+  <script src="data.js?v=15"></script>
+  <script src="app.js?v=15"></script>
+</body>
+</html>
