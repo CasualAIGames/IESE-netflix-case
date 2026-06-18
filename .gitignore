@@ -1,3 +1,2 @@
-# Excluir los vídeos grandes para no superar los límites de GitHub (100MB por archivo)
-media/*.mp4
-media/**/*.mp4
+# Los videos ahora están comprimidos (13MB y 28MB) y se pueden subir directamente a GitHub
+# no ignora mp4
