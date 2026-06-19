@@ -1,2 +1,7 @@
 # Los videos ahora están comprimidos (13MB y 28MB) y se pueden subir directamente a GitHub
 # no ignora mp4
+
+# Archivos de resumen/documentación local
+RESUMEN_APP.html
+RESUMEN_APP.pdf
+gen_pdf.cjs

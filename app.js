@@ -2000,158 +2000,19 @@ function renderProfessor() {
   $("#screen-professor").innerHTML = `
     <div class="crumbs">${t('crumbsHome')}</div>
     <div class="section">
-      <div class="section-head section-head-row">
-        <div>
+      <div class="section-head">
           <div class="kicker">${t('profKicker', C_ACTIVE.titulo)}</div>
           <h1>${t('profTitle')}</h1>
           <p class="lead">${t('profSub', als.length)}</p>
-        </div>
-        <button class="btn" id="btnStudio" style="flex-shrink:0">${t('btnCreateCase')} <span class="arr">&#10142;</span></button>
       </div>
       <div id="profBody"></div>
     </div>`;
   renderProfOverview();
-  const bs = $("#btnStudio");
-  if (bs) bs.onclick = renderStudio;
   show("#screen-professor");
   demoNote(t('demoNoteProf'));
 }
 
-/* ============================================================
-   IESE Case Studio — editor de casos sin código (maqueta navegable)
-   ============================================================ */
-function studioToast(msg) {
-  demoNote("<b>Case Studio (demo)</b> · " + msg);
-}
 
-function renderStudio() {
-  pararTimers();
-  $("#screen-studio").innerHTML = `
-    <div class="crumbs">${S.lang === 'es' ? 'Inicio &nbsp;|&nbsp; Panel del profesor &nbsp;|&nbsp; <b>Case Studio</b>' : 'Home &nbsp;|&nbsp; Professor Panel &nbsp;|&nbsp; <b>Case Studio</b>'}</div>
-    <div class="studio-top">
-      <div>
-        <div class="kicker" style="color:var(--rojo)">IESE Case Studio</div>
-        <h1 style="font-size:30px;font-weight:800">${S.lang === 'es' ? 'Crea tu propio caso interactivo' : 'Create your own interactive case'}</h1>
-        <p style="font-family:var(--serif);color:var(--gris-700);margin-top:6px">${S.lang === 'es' ? 'Sin programar: redacta, sube tus vídeos y publica para tu clase en minutos.' : 'No coding required: write, upload your videos, and publish to your class in minutes.'}</p>
-      </div>
-      <div class="studio-top-actions">
-        <button class="btn sec" id="studioBack">${S.lang === 'es' ? '&#8592; Volver al panel' : '&#8592; Back to panel'}</button>
-        <button class="btn" id="studioPublish">${S.lang === 'es' ? 'Publicar y asignar' : 'Publish & assign'} <span class="arr">&#10142;</span></button>
-      </div>
-    </div>
-
-    <div class="studio-steps">
-      <div class="ss-step done"><span class="ss-n">1</span> ${S.lang === 'es' ? 'Ficha del caso' : 'Case details'}</div>
-      <div class="ss-step act"><span class="ss-n">2</span> ${S.lang === 'es' ? 'Decisiones y contenido' : 'Decisions & content'}</div>
-      <div class="ss-step"><span class="ss-n">3</span> ${S.lang === 'es' ? 'Publicar' : 'Publish'}</div>
-    </div>
-
-    <div class="studio-grid">
-      <!-- Constructor -->
-      <div class="studio-build">
-        <div class="studio-card">
-          <h3>${S.lang === 'es' ? 'Ficha del caso' : 'Case details'}</h3>
-          <div class="sf-grid">
-            <label class="sf">${S.lang === 'es' ? 'Empresa' : 'Company'}<input type="text" value="Spotify"></label>
-            <label class="sf">${S.lang === 'es' ? 'Periodo' : 'Period'}<input type="text" value="2008 – 2018"></label>
-            <label class="sf">${S.lang === 'es' ? 'Sector' : 'Industry'}<input type="text" value="Música · Tecnología"></label>
-            <label class="sf">${S.lang === 'es' ? 'Dificultad' : 'Difficulty'}
-              <select><option>${S.lang === 'es' ? 'Avanzado' : 'Advanced'}</option><option>${S.lang === 'es' ? 'Intermedio' : 'Intermediate'}</option><option>${S.lang === 'es' ? 'Introductorio' : 'Introductory'}</option></select>
-            </label>
-          </div>
-          <label class="sf" style="margin-top:14px">${S.lang === 'es' ? 'Título del caso' : 'Case Title'}<input type="text" value="Spotify: ¿gratis para siempre?"></label>
-          <label class="sf" style="margin-top:14px">${S.lang === 'es' ? 'Áreas' : 'Topics'}
-            <div class="sf-chips"><span class="sf-chip">${S.lang === 'es' ? 'Estrategia ×' : 'Strategy ×'}</span><span class="sf-chip">${S.lang === 'es' ? 'Modelos de negocio ×' : 'Business models ×'}</span><span class="sf-chip add" id="addArea">＋ ${S.lang === 'es' ? 'añadir' : 'add'}</span></div>
-          </label>
-        </div>
-
-        <div class="studio-card">
-          <div class="sc-head"><h3>${S.lang === 'es' ? 'Bloques del caso' : 'Case blocks'}</h3><span class="sc-sub">${S.lang === 'es' ? 'arrastra para reordenar' : 'drag to reorder'}</span></div>
-          <div class="block-list">
-            <div class="block-item"><span class="bi-ico prof">🎓</span> ${S.lang === 'es' ? 'Profesor IA · Bienvenida' : 'AI Professor · Welcome'} <span class="bi-fmt">9:16</span></div>
-            <div class="block-item"><span class="bi-ico vid">🎬</span> ${S.lang === 'es' ? 'Recreación · Los inicios de Spotify' : 'Recreation · Spotify\'s beginnings'} <span class="bi-fmt">16:9</span></div>
-            <div class="block-item"><span class="bi-ico dat">📊</span> ${S.lang === 'es' ? 'Datos · El mercado de la música 2008' : 'Data · Music industry 2008'}</div>
-            <div class="block-item act"><span class="bi-ico dec">⚖️</span> ${S.lang === 'es' ? 'Decisión 1 · ¿Modelo freemium o solo pago?' : 'Decision 1 · Freemium or paid-only?'} <span class="bi-edit">${S.lang === 'es' ? 'editando ▸' : 'editing ▸'}</span></div>
-            <div class="block-item"><span class="bi-ico vid">🎬</span> ${S.lang === 'es' ? 'Recreación · Lo que hizo Spotify' : 'Recreation · What Spotify did'}</div>
-            <div class="block-add" id="addBlock">＋ ${S.lang === 'es' ? 'Añadir bloque (profesor · vídeo · datos · decisión)' : 'Add block (professor · video · data · decision)'}</div>
-          </div>
-        </div>
-
-        <div class="studio-card">
-          <h3>${S.lang === 'es' ? 'Decisión 1 · ¿Modelo freemium o solo pago?' : 'Decision 1 · Freemium or paid-only?'}</h3>
-          <label class="sf" style="margin-top:8px">${S.lang === 'es' ? 'Contexto que ve el alumno' : 'Context seen by student'}<textarea rows="2">${S.lang === 'es' ? 'Es 2008. Tienes la tecnología de streaming, pero los sellos discográficos exigen ingresos garantizados. ¿Cómo lanzas Spotify?' : 'It\'s 2008. You have the streaming technology, but record labels demand guaranteed revenues. How do you launch Spotify?'}</textarea></label>
-
-          <div class="opt-builder" id="optBuilder">
-            <div class="ob-row">
-              <span class="ob-letter">A</span>
-              <input type="text" value="${S.lang === 'es' ? 'Freemium: gratis con anuncios + premium de pago' : 'Freemium: free with ads + paid premium'}">
-              <label class="ob-q">${S.lang === 'es' ? 'Calidad' : 'Quality'} <input type="number" value="90" min="0" max="100"></label>
-              <select class="ob-risk"><option>${S.lang === 'es' ? 'Riesgo Alto' : 'High Risk'}</option><option>${S.lang === 'es' ? 'Medio' : 'Medium'}</option><option>${S.lang === 'es' ? 'Bajo' : 'Low'}</option></select>
-            </div>
-            <div class="ob-row">
-              <span class="ob-letter">B</span>
-              <input type="text" value="${S.lang === 'es' ? 'Solo suscripción de pago desde el día uno' : 'Paid subscription only from day one'}">
-              <label class="ob-q">${S.lang === 'es' ? 'Calidad' : 'Quality'} <input type="number" value="45" min="0" max="100"></label>
-              <select class="ob-risk"><option>${S.lang === 'es' ? 'Medio' : 'Medium'}</option><option>${S.lang === 'es' ? 'Riesgo Alto' : 'High Risk'}</option><option>${S.lang === 'es' ? 'Bajo' : 'Low'}</option></select>
-            </div>
-          </div>
-          <button class="btn sec" id="addOpt" style="padding:9px 16px;margin-top:12px">＋ ${S.lang === 'es' ? 'Añadir opción' : 'Add option'}</button>
-        </div>
-
-        <div class="studio-card">
-          <h3>${S.lang === 'es' ? 'Vídeo de recreación + rótulos' : 'Recreation video + overlays'}</h3>
-          <div class="dropzone" id="dropzone">
-            <div class="dz-ico">⬆</div>
-            <div class="dz-txt">${S.lang === 'es' ? 'Arrastra tu vídeo <b>.mp4</b> o <span class="dz-link">pega un enlace</span>' : 'Drag your <b>.mp4</b> video or <span class="dz-link">paste a link</span>'}</div>
-            <button class="btn sec" id="genIA" style="padding:9px 16px;margin-top:12px">${S.lang === 'es' ? '✦ Generar recreación con IA' : '✦ Generate recreation with AI'}</button>
-          </div>
-          <div class="rotulo-row">
-            <span>${S.lang === 'es' ? 'Rótulo de dato' : 'Data overlay'}</span>
-            <input type="text" value="${S.lang === 'es' ? '60 M de usuarios' : '60 M users'}" style="flex:1">
-            <label class="ob-q">${S.lang === 'es' ? 'Aparece en' : 'Appears at'} <input type="text" value="0:24" style="width:56px"></label>
-            <label class="ob-q">${S.lang === 'es' ? 'Dura' : 'Duration'} <input type="number" value="3" style="width:48px"> s</label>
-          </div>
-        </div>
-      </div>
-
-      <!-- Vista previa -->
-      <div class="studio-preview">
-        <div class="sp-label">${S.lang === 'es' ? 'Vista previa en vivo' : 'Live preview'}</div>
-        <div class="sp-frame">
-          <div class="sp-fase">${S.lang === 'es' ? 'Decisión 1 · Momento de decisión 1 de 3' : 'Decision 1 · Decision moment 1 of 3'}</div>
-          <div class="sp-title">${S.lang === 'es' ? '¿Modelo freemium o solo pago?' : 'Freemium or paid-only?'}</div>
-          <div class="sp-ctx">${S.lang === 'es' ? 'Es 2008. Tienes la tecnología de streaming, pero los sellos discográficos exigen ingresos garantizados…' : 'It\'s 2008. You have the streaming technology, but record labels demand guaranteed revenues…'}</div>
-          <div class="sp-opt"><span class="sp-l">A</span> ${S.lang === 'es' ? 'Freemium: gratis con anuncios + premium de pago' : 'Freemium: free with ads + paid premium'}</div>
-          <div class="sp-opt"><span class="sp-l">B</span> ${S.lang === 'es' ? 'Solo suscripción de pago desde el día uno' : 'Paid subscription only from day one'}</div>
-          <div class="sp-reason">${S.lang === 'es' ? 'Tu razonamiento…' : 'Your reasoning…'}</div>
-          <div class="sp-conf">${S.lang === 'es' ? '¿Cómo de seguro estás?' : 'How confident are you?'} &nbsp;▓▓▓▓▓▓░░░░ 60%</div>
-        </div>
-        <div class="sp-note">${S.lang === 'es' ? 'Así lo verá el alumno. Todo lo que editas a la izquierda se refleja aquí.' : 'This is how the student will see it. Everything you edit on the left is reflected here.'}</div>
-      </div>
-    </div>`;
-
-  $("#studioBack").onclick = () => { renderProfessor(); show("#screen-professor"); };
-  $("#studioPublish").onclick = () => studioToast(S.lang === 'es' ? "El caso «Spotify» se asignaría a MBA · Sección B y aparecería en sus casos. En esta demo no se guarda." : "The 'Spotify' case would be assigned to MBA · Section B and would appear in their cases. It is not saved in this demo.");
-  $("#addBlock").onclick = () => studioToast(S.lang === 'es' ? "Aquí se abriría el selector de bloque: Profesor IA, Recreación, Datos o Decisión." : "Here the block selector would open: AI Professor, Recreation, Data or Decision.");
-  $("#addArea").onclick = () => studioToast(S.lang === 'es' ? "Añadir área temática al caso." : "Add topic area to case.");
-  $("#genIA").onclick = () => studioToast(S.lang === 'es' ? "Generaría una recreación de vídeo + voz en off con IA a partir del guion del caso." : "Generates a video + voiceover recreation with AI from the case script.");
-  const dz = $("#dropzone");
-  if (dz) { dz.ondragover = (e) => { e.preventDefault(); dz.classList.add("over"); }; dz.ondragleave = () => dz.classList.remove("over"); dz.ondrop = (e) => { e.preventDefault(); dz.classList.remove("over"); studioToast(S.lang === 'es' ? "Aquí se subiría el vídeo .mp4 de la recreación." : "Here the recreation .mp4 video would be uploaded."); }; }
-  const ao = $("#addOpt");
-  if (ao) {
-    let letras = ["C", "D", "E"]; let i = 0;
-    ao.onclick = () => {
-      if (i >= letras.length) return studioToast(S.lang === 'es' ? "Máximo de opciones alcanzado en la demo." : "Maximum options reached in this demo.");
-      const L = letras[i++];
-      const row = document.createElement("div");
-      row.className = "ob-row";
-      row.innerHTML = `<span class="ob-letter">${L}</span><input type="text" placeholder="${S.lang === 'es' ? `Describe la opción ${L}…` : `Describe option ${L}…`}"><label class="ob-q">${S.lang === 'es' ? 'Calidad' : 'Quality'} <input type="number" value="50" min="0" max="100"></label><select class="ob-risk"><option>${S.lang === 'es' ? 'Medio' : 'Medium'}</option><option>${S.lang === 'es' ? 'Riesgo Alto' : 'High Risk'}</option><option>${S.lang === 'es' ? 'Bajo' : 'Low'}</option></select>`;
-      $("#optBuilder").appendChild(row);
-    };
-  }
-  show("#screen-studio");
-  demoNote(t('demoNoteStudio'));
-}
 
 function renderProfOverview() {
   const als = listaAlumnos();
@@ -2918,8 +2779,6 @@ function updateLanguageUI(lang) {
     terminarCaso();
   } else if ($("#screen-professor").classList.contains("visible")) {
     renderProfessor();
-  } else if ($("#screen-studio").classList.contains("visible")) {
-    renderStudio();
   }
 }
 
