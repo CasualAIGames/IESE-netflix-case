@@ -703,12 +703,12 @@ function cinePlayerHTML(paso, id) {
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
           ${t('transcriptBtn')}
         </button>
-        ${ovs.length ? `<button class="ov-edit-toggle" id="oet_${id}">
+        ${(ovs.length && !tieneVideo) ? `<button class="ov-edit-toggle" id="oet_${id}">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>
           ${t('ovEditorToggle')}
         </button>` : ""}
         <div class="transcript-panel" id="tp_${id}" style="display:none">${paso.transcript || (S.lang === 'es' ? "Transcripción no disponible para este fragmento." : "Transcript not available for this segment.")}</div>
-        ${ovs.length ? overlayEditorHTML(ovs, id) : ""}
+        ${(ovs.length && !tieneVideo) ? overlayEditorHTML(ovs, id) : ""}
       </div>
     </div>`;
 }
@@ -1533,7 +1533,7 @@ function vistaProfesorIA(paso) {
           <div class="prof-cam-badge"><span class="rec-dot"></span>${paso.videoSrc ? (S.lang === 'es' ? 'Vídeo del profesor' : 'Professor video') : t('live')}</div>
           <div class="prof-cam-name">Prof. A. Valls</div>
           <div class="prof-cam-role">${t('profDept')}</div>
-          <span class="prof-cam-ia-tag">${t('formatIaTag')}</span>
+          ${paso.videoSrc ? '' : `<span class="prof-cam-ia-tag">${t('formatIaTag')}</span>`}
         </div>
       </div>
       <div class="prof-speech-area">
@@ -1542,7 +1542,7 @@ function vistaProfesorIA(paso) {
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.5 8.5a5 5 0 010 7M19 5a9 9 0 010 14"/></svg>
           ${paso.videoSrc ? t('profSpeechHint') : (S.lang === 'es' ? 'El avatar IA narraría este bloque con voz y vídeo 9:16. Haz clic en el texto para completarlo.' : 'The AI avatar would narrate this block with voice and 9:16 video. Click on the text to complete it.')}
         </div>
-        ${(paso.avatarOverlays && paso.avatarOverlays.length) ? `
+        ${(!paso.videoSrc && paso.avatarOverlays && paso.avatarOverlays.length) ? `
         <div class="transcript-bar" style="margin-top:18px">
           <button class="ov-edit-toggle" id="aoet" style="border-left:none">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>
